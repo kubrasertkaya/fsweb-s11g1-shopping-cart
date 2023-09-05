@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Route } from "react-router-dom";
 import { data } from "./data";
 
+import {ProductContext} from "./contexts/ProductContext";
+
 // Bileşenler
 import Navigation from "./components/Navigation";
 import Products from "./components/Products";
@@ -16,13 +18,14 @@ function App() {
   };
 
   return (
+    <ProductContext.Provider value={{products}}> 
     <div className="App">
       <Navigation cart={cart} />
 
       {/* Routelar */}
       <main className="content">
         <Route exact path="/">
-          <Products products={products} addItem={addItem} />
+          <Products /*products={products} addItem={addItem} *//>
         </Route>
 
         <Route path="/cart">
@@ -30,7 +33,9 @@ function App() {
         </Route>
       </main>
     </div>
+  </ProductContext.Provider>
   );
+    
 }
 
 export default App;
